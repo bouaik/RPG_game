@@ -169,7 +169,7 @@ var BootScene = function (_Phaser$Scene) {
   _createClass(BootScene, [{
     key: 'preload',
     value: function preload() {
-      // this.load.image('logo', 'assets/zenva_logo.png');
+      this.load.image('logo1', 'assets/zenva_logo.png');
     }
   }, {
     key: 'create',
@@ -218,7 +218,7 @@ var PreloaderScene = function (_Phaser$Scene) {
     key: 'preload',
     value: function preload() {
       // add logo image
-      this.add.image(400, 200, 'logo');
+      this.add.image(400, 200, 'logo1');
 
       // display progress bar
       var progressBar = this.add.graphics();
@@ -305,7 +305,7 @@ var PreloaderScene = function (_Phaser$Scene) {
   }, {
     key: 'ready',
     value: function ready() {
-      this.scene.start('Title');
+      this.scene.start('Credits');
       this.readyCount++;
       if (this.readyCount === 2) {
         this.scene.start('Title');
@@ -370,6 +370,35 @@ var TitleScene = function (_Phaser$Scene) {
 
             this.gameButton.on('pointerdown', function (pointer) {
                 this.scene.start('Game');
+            }.bind(this));
+
+            this.input.on('pointerover', function (event, gameObjects) {
+                gameObjects[0].setTexture('blueButton2');
+            });
+
+            this.input.on('pointerout', function (event, gameObjects) {
+                gameObjects[0].setTexture('blueButton1');
+            });
+
+            this.optionsButton = this.add.sprite(300, 200, 'blueButton1').setInteractive();
+            this.centerButton(this.optionsButton);
+
+            this.optionsText = this.add.text(0, 0, 'Options', { fontSize: '32px', fill: '#fff' });
+            this.centerButtonText(this.optionsText, this.optionsButton);
+
+            this.optionsButton.on('pointerdown', function (pointer) {
+                this.scene.start('Options');
+            }.bind(this));
+
+            // Credits
+            this.creditsButton = this.add.sprite(300, 200, 'blueButton1').setInteractive();
+            this.centerButton(this.creditsButton, -1);
+
+            this.creditsText = this.add.text(0, 0, 'Credits', { fontSize: '32px', fill: '#fff' });
+            this.centerButtonText(this.creditsText, this.creditsButton);
+
+            this.creditsButton.on('pointerdown', function (pointer) {
+                this.scene.start('Credits');
             }.bind(this));
 
             this.input.on('pointerover', function (event, gameObjects) {
@@ -459,6 +488,12 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 __webpack_require__(0);
 
+var _config = __webpack_require__(1);
+
+var _config2 = _interopRequireDefault(_config);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -479,7 +514,39 @@ var CreditsScene = function (_Phaser$Scene) {
     value: function preload() {}
   }, {
     key: 'create',
-    value: function create() {}
+    value: function create() {
+      this.creditsText = this.add.text(0, 0, 'Credits', { fontSize: '32px', fill: '#fff' });
+      this.madeByText = this.add.text(0, 0, 'Created By: Placeholder', { fontSize: '26px', fill: '#fff' });
+      this.zone = this.add.zone(_config2.default.width / 2, _config2.default.height / 2, _config2.default.width, _config2.default.height);
+
+      Phaser.Display.Align.In.Center(this.creditsText, this.zone);
+
+      Phaser.Display.Align.In.Center(this.madeByText, this.zone);
+
+      this.madeByText.setY(1000);
+      this.creditsTween = this.tweens.add({
+        targets: this.creditsText,
+        y: -100,
+        ease: 'Power1',
+        duration: 3000,
+        delay: 1000,
+        onComplete: function onComplete() {
+          this.destroy;
+        }
+      });
+
+      this.madeByTween = this.tweens.add({
+        targets: this.madeByText,
+        y: -300,
+        ease: 'Power1',
+        duration: 8000,
+        delay: 1000,
+        onComplete: function () {
+          this.madeByTween.destroy;
+          this.scene.start('Title');
+        }.bind(this)
+      });
+    }
   }]);
 
   return CreditsScene;

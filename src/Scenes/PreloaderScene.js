@@ -7,7 +7,7 @@ export default class PreloaderScene extends Phaser.Scene {
  
   preload () {
     // add logo image
-    this.add.image(400, 200, 'logo');
+    this.add.image(400, 200, 'logo1');
    
     // display progress bar
     var progressBar = this.add.graphics();
@@ -85,7 +85,7 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   create () {
-      
+
   }
 
   init () {
@@ -93,7 +93,7 @@ export default class PreloaderScene extends Phaser.Scene {
   }
    
   ready () {
-    this.scene.start('Title');
+    this.scene.start('Credits');
     this.readyCount++;
     if (this.readyCount === 2) {
       this.scene.start('Title');

@@ -26,37 +26,96 @@ exports.default = {
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+   value: true
+});
+
+__webpack_require__(0);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Button = function (_Phaser$GameObjects$C) {
+   _inherits(Button, _Phaser$GameObjects$C);
+
+   function Button(scene, x, y, key1, key2, text, targetScene) {
+      _classCallCheck(this, Button);
+
+      var _this = _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this, scene));
+
+      _this.scene = scene;
+      _this.x = x;
+      _this.y = y;
+
+      _this.button = _this.scene.add.sprite(0, 0, key1).setInteractive();
+      _this.text = _this.scene.add.text(0, 0, text, { fontSize: '32px', fill: '#fff' });
+      Phaser.Display.Align.In.Center(_this.text, _this.button);
+
+      _this.add(_this.button);
+      _this.add(_this.text);
+
+      _this.button.on('pointerdown', function () {
+         this.scene.scene.start(targetScene);
+      }.bind(_this));
+
+      _this.button.on('pointerover', function () {
+         this.button.setTexture(key2);
+      }.bind(_this));
+
+      _this.button.on('pointerout', function () {
+         this.button.setTexture(key1);
+      }.bind(_this));
+
+      _this.scene.add.existing(_this);
+      return _this;
+   }
+
+   return Button;
+}(Phaser.GameObjects.Container);
+
+exports.default = Button;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 __webpack_require__(0);
 
 var _config = __webpack_require__(1);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _GameScene = __webpack_require__(3);
+var _GameScene = __webpack_require__(4);
 
 var _GameScene2 = _interopRequireDefault(_GameScene);
 
-var _BootScene = __webpack_require__(4);
+var _BootScene = __webpack_require__(5);
 
 var _BootScene2 = _interopRequireDefault(_BootScene);
 
-var _PreloaderScene = __webpack_require__(5);
+var _PreloaderScene = __webpack_require__(6);
 
 var _PreloaderScene2 = _interopRequireDefault(_PreloaderScene);
 
-var _TitleScene = __webpack_require__(6);
+var _TitleScene = __webpack_require__(7);
 
 var _TitleScene2 = _interopRequireDefault(_TitleScene);
 
-var _OptionsScene = __webpack_require__(7);
+var _OptionsScene = __webpack_require__(8);
 
 var _OptionsScene2 = _interopRequireDefault(_OptionsScene);
 
-var _CreditsScene = __webpack_require__(8);
+var _CreditsScene = __webpack_require__(9);
 
 var _CreditsScene2 = _interopRequireDefault(_CreditsScene);
 
-var _Model = __webpack_require__(9);
+var _Model = __webpack_require__(10);
 
 var _Model2 = _interopRequireDefault(_Model);
 
@@ -77,7 +136,7 @@ var Game = function (_Phaser$Game) {
     var _this = _possibleConstructorReturn(this, (Game.__proto__ || Object.getPrototypeOf(Game)).call(this, _config2.default));
 
     var model = new _Model2.default();
-    _this.globals = { model: model };
+    _this.globals = { model: model, bgMusic: null };
     _this.scene.add('Boot', _BootScene2.default);
     _this.scene.add('Preloader', _PreloaderScene2.default);
     _this.scene.add('Title', _TitleScene2.default);
@@ -94,7 +153,7 @@ var Game = function (_Phaser$Game) {
 window.game = new Game();
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -143,7 +202,7 @@ exports.default = GameScene;
 ;
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -191,7 +250,7 @@ exports.default = BootScene;
 ;
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -311,7 +370,7 @@ var PreloaderScene = function (_Phaser$Scene) {
   }, {
     key: 'ready',
     value: function ready() {
-      this.scene.start('Options');
+      this.scene.start('Title');
       this.readyCount++;
       if (this.readyCount === 2) {
         this.scene.start('Title');
@@ -323,116 +382,6 @@ var PreloaderScene = function (_Phaser$Scene) {
 }(Phaser.Scene);
 
 exports.default = PreloaderScene;
-;
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-__webpack_require__(0);
-
-var _config = __webpack_require__(1);
-
-var _config2 = _interopRequireDefault(_config);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var TitleScene = function (_Phaser$Scene) {
-    _inherits(TitleScene, _Phaser$Scene);
-
-    function TitleScene() {
-        _classCallCheck(this, TitleScene);
-
-        return _possibleConstructorReturn(this, (TitleScene.__proto__ || Object.getPrototypeOf(TitleScene)).call(this, 'Title'));
-    }
-
-    _createClass(TitleScene, [{
-        key: 'preload',
-        value: function preload() {}
-    }, {
-        key: 'create',
-        value: function create() {
-            // Game
-            this.gameButton = this.add.sprite(100, 200, 'blueButton1').setInteractive();
-            this.centerButton(this.gameButton, 1);
-
-            this.gameText = this.add.text(0, 0, 'Play', { fontSize: '32px', fill: '#fff' });
-            this.centerButtonText(this.gameText, this.gameButton);
-
-            this.gameButton.on('pointerdown', function (pointer) {
-                this.scene.start('Game');
-            }.bind(this));
-
-            this.input.on('pointerover', function (event, gameObjects) {
-                gameObjects[0].setTexture('blueButton2');
-            });
-
-            this.input.on('pointerout', function (event, gameObjects) {
-                gameObjects[0].setTexture('blueButton1');
-            });
-
-            this.optionsButton = this.add.sprite(300, 200, 'blueButton1').setInteractive();
-            this.centerButton(this.optionsButton);
-
-            this.optionsText = this.add.text(0, 0, 'Options', { fontSize: '32px', fill: '#fff' });
-            this.centerButtonText(this.optionsText, this.optionsButton);
-
-            this.optionsButton.on('pointerdown', function (pointer) {
-                this.scene.start('Options');
-            }.bind(this));
-
-            // Credits
-            this.creditsButton = this.add.sprite(300, 200, 'blueButton1').setInteractive();
-            this.centerButton(this.creditsButton, -1);
-
-            this.creditsText = this.add.text(0, 0, 'Credits', { fontSize: '32px', fill: '#fff' });
-            this.centerButtonText(this.creditsText, this.creditsButton);
-
-            this.creditsButton.on('pointerdown', function (pointer) {
-                this.scene.start('Credits');
-            }.bind(this));
-
-            this.input.on('pointerover', function (event, gameObjects) {
-                gameObjects[0].setTexture('blueButton2');
-            });
-
-            this.input.on('pointerout', function (event, gameObjects) {
-                gameObjects[0].setTexture('blueButton1');
-            });
-        }
-    }, {
-        key: 'centerButton',
-        value: function centerButton(gameObject) {
-            var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-
-            Phaser.Display.Align.In.Center(gameObject, this.add.zone(_config2.default.width / 2, _config2.default.height / 2 - offset * 100, _config2.default.width, _config2.default.height));
-        }
-    }, {
-        key: 'centerButtonText',
-        value: function centerButtonText(gameText, gameButton) {
-            Phaser.Display.Align.In.Center(gameText, gameButton);
-        }
-    }]);
-
-    return TitleScene;
-}(Phaser.Scene);
-
-exports.default = TitleScene;
 ;
 
 /***/ }),
@@ -449,6 +398,83 @@ Object.defineProperty(exports, "__esModule", {
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 __webpack_require__(0);
+
+var _config = __webpack_require__(1);
+
+var _config2 = _interopRequireDefault(_config);
+
+var _Button = __webpack_require__(2);
+
+var _Button2 = _interopRequireDefault(_Button);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var TitleScene = function (_Phaser$Scene) {
+  _inherits(TitleScene, _Phaser$Scene);
+
+  function TitleScene() {
+    _classCallCheck(this, TitleScene);
+
+    return _possibleConstructorReturn(this, (TitleScene.__proto__ || Object.getPrototypeOf(TitleScene)).call(this, 'Title'));
+  }
+
+  _createClass(TitleScene, [{
+    key: 'preload',
+    value: function preload() {}
+  }, {
+    key: 'create',
+    value: function create() {
+      // Game
+      this.gameButton = new _Button2.default(this, _config2.default.width / 2, _config2.default.height / 2 - 100, 'blueButton1', 'blueButton2', 'Play', 'Game');
+
+      // Options
+      this.optionsButton = new _Button2.default(this, _config2.default.width / 2, _config2.default.height / 2, 'blueButton1', 'blueButton2', 'Options', 'Options');
+
+      // Credits
+      this.creditsButton = new _Button2.default(this, _config2.default.width / 2, _config2.default.height / 2 + 100, 'blueButton1', 'blueButton2', 'Credits', 'Credits');
+
+      this.model = this.sys.game.globals.model;
+      if (this.model.musicOn === true && this.model.bgMusicPlaying === false) {
+        this.bgMusic = this.sound.add('bgMusic', { volume: 0.5, loop: true });
+        this.bgMusic.play();
+        this.model.bgMusicPlaying = true;
+        this.sys.game.globals.bgMusic = this.bgMusic;
+      }
+    }
+  }]);
+
+  return TitleScene;
+}(Phaser.Scene);
+
+exports.default = TitleScene;
+;
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+__webpack_require__(0);
+
+var _Button = __webpack_require__(2);
+
+var _Button2 = _interopRequireDefault(_Button);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -494,13 +520,8 @@ var OptionsScene = function (_Phaser$Scene) {
       }.bind(this));
 
       this.updateAudio();
-      this.menuButton = this.add.sprite(400, 500, 'blueButton1').setInteractive();
-      this.menuText = this.add.text(0, 0, 'Menu', { fontSize: '32px', fill: '#fff' });
-      Phaser.Display.Align.In.Center(this.menuText, this.menuButton);
 
-      this.menuButton.on('pointerdown', function (pointer) {
-        this.scene.start('Title');
-      }.bind(this));
+      this.menuButton = new _Button2.default(this, 400, 500, 'blueButton1', 'blueButton2', 'Menu', 'Title');
 
       this.updateAudio();
     }
@@ -509,8 +530,14 @@ var OptionsScene = function (_Phaser$Scene) {
     value: function updateAudio() {
       if (this.model.musicOn === false) {
         this.musicButton.setTexture('box');
+        this.sys.game.globals.bgMusic.stop();
+        this.model.bgMusicPlaying = false;
       } else {
         this.musicButton.setTexture('checkedBox');
+        if (this.model.bgMusicPlaying === false) {
+          this.sys.game.globals.bgMusic.play();
+          this.model.bgMusicPlaying = true;
+        }
       }
 
       if (this.model.soundOn === false) {
@@ -528,7 +555,7 @@ exports.default = OptionsScene;
 ;
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -610,7 +637,7 @@ exports.default = CreditsScene;
 ;
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -665,4 +692,4 @@ var Model = function () {
 exports.default = Model;
 
 /***/ })
-],[2]);
+],[3]);

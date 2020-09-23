@@ -56,6 +56,10 @@ var _CreditsScene = __webpack_require__(8);
 
 var _CreditsScene2 = _interopRequireDefault(_CreditsScene);
 
+var _Model = __webpack_require__(9);
+
+var _Model2 = _interopRequireDefault(_Model);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -72,6 +76,8 @@ var Game = function (_Phaser$Game) {
 
     var _this = _possibleConstructorReturn(this, (Game.__proto__ || Object.getPrototypeOf(Game)).call(this, _config2.default));
 
+    var model = new _Model2.default();
+    _this.globals = { model: model };
     _this.scene.add('Boot', _BootScene2.default);
     _this.scene.add('Preloader', _PreloaderScene2.default);
     _this.scene.add('Title', _TitleScene2.default);
@@ -305,7 +311,6 @@ var PreloaderScene = function (_Phaser$Scene) {
   }, {
     key: 'ready',
     value: function ready() {
-      1;
       this.scene.start('Options');
       this.readyCount++;
       if (this.readyCount === 2) {
@@ -466,8 +471,7 @@ var OptionsScene = function (_Phaser$Scene) {
   }, {
     key: 'create',
     value: function create() {
-      this.musicOn = true;
-      this.soundOn = true;
+      this.model = this.sys.game.globals.model;
 
       this.text = this.add.text(300, 100, 'Options', { fontSize: 40 });
       this.musicButton = this.add.image(200, 200, 'checkedBox');
@@ -480,12 +484,12 @@ var OptionsScene = function (_Phaser$Scene) {
       this.soundButton.setInteractive();
 
       this.musicButton.on('pointerdown', function () {
-        this.musicOn = !this.musicOn;
+        this.model.musicOn = !this.model.musicOn;
         this.updateAudio();
       }.bind(this));
 
       this.soundButton.on('pointerdown', function () {
-        this.soundOn = !this.soundOn;
+        this.model.soundOn = !this.model.soundOn;
         this.updateAudio();
       }.bind(this));
 
@@ -497,17 +501,19 @@ var OptionsScene = function (_Phaser$Scene) {
       this.menuButton.on('pointerdown', function (pointer) {
         this.scene.start('Title');
       }.bind(this));
+
+      this.updateAudio();
     }
   }, {
     key: 'updateAudio',
     value: function updateAudio() {
-      if (this.musicOn === false) {
+      if (this.model.musicOn === false) {
         this.musicButton.setTexture('box');
       } else {
         this.musicButton.setTexture('checkedBox');
       }
 
-      if (this.soundOn === false) {
+      if (this.model.soundOn === false) {
         this.soundButton.setTexture('box');
       } else {
         this.soundButton.setTexture('checkedBox');
@@ -602,6 +608,61 @@ var CreditsScene = function (_Phaser$Scene) {
 
 exports.default = CreditsScene;
 ;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Model = function () {
+  function Model() {
+    _classCallCheck(this, Model);
+
+    this._soundOn = true;
+    this._musicOn = true;
+    this._bgMusicPlaying = false;
+  }
+
+  _createClass(Model, [{
+    key: "musicOn",
+    set: function set(value) {
+      this._musicOn = value;
+    },
+    get: function get() {
+      return this._musicOn;
+    }
+  }, {
+    key: "soundOn",
+    set: function set(value) {
+      this._soundOn = value;
+    },
+    get: function get() {
+      return this._soundOn;
+    }
+  }, {
+    key: "bgMusicPlaying",
+    set: function set(value) {
+      this._bgMusicPlaying = value;
+    },
+    get: function get() {
+      return this._bgMusicPlaying;
+    }
+  }]);
+
+  return Model;
+}();
+
+exports.default = Model;
 
 /***/ })
 ],[2]);

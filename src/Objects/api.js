@@ -1,7 +1,7 @@
 import 'regenerator-runtime';
 
 const Api = (() => {
-  const key = 'Hm3s8TVlfpOKKVs5mLeb';
+  const key = 'Hm3s8TVlfpOKKVs5mLec';
   async function fetchScores() {
     try {
       const scores = await fetch(

@@ -7,75 +7,6 @@ webpackJsonp([0],[
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-__webpack_require__(0);
-
-/* eslint-disable no-undef */
-
-exports.default = {
-  type: Phaser.AUTO,
-  parent: 'phaser-example',
-  width: 1200,
-  height: 600,
-  physics: {
-    default: 'arcade',
-    arcade: {
-      debug: false,
-      gravity: {
-        y: 0
-      }
-    }
-  },
-  pixelArt: true,
-  roundPixels: true,
-  dom: {
-    createContainer: true
-  }
-};
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var v1 = __webpack_require__(17);
-var v4 = __webpack_require__(18);
-
-var uuid = v4;
-uuid.v1 = v1;
-uuid.v4 = v4;
-
-module.exports = uuid;
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var SpawnerType = exports.SpawnerType = {
-  MONSTER: 'MONSTER',
-  CHEST: 'CHEST'
-};
-
-var randomNumber = exports.randomNumber = function randomNumber(min, max) {
-  return Math.floor(Math.random() * max) + min;
-};
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
    value: true
 });
 
@@ -126,6 +57,75 @@ var Button = function (_Phaser$GameObjects$C) {
 }(Phaser.GameObjects.Container);
 
 exports.default = Button;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+__webpack_require__(0);
+
+/* eslint-disable no-undef */
+
+exports.default = {
+  type: Phaser.AUTO,
+  parent: 'phaser-example',
+  width: 1200,
+  height: 600,
+  physics: {
+    default: 'arcade',
+    arcade: {
+      debug: false,
+      gravity: {
+        y: 0
+      }
+    }
+  },
+  pixelArt: true,
+  roundPixels: true,
+  dom: {
+    createContainer: true
+  }
+};
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var v1 = __webpack_require__(18);
+var v4 = __webpack_require__(19);
+
+var uuid = v4;
+uuid.v1 = v1;
+uuid.v4 = v4;
+
+module.exports = uuid;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var SpawnerType = exports.SpawnerType = {
+  MONSTER: 'MONSTER',
+  CHEST: 'CHEST'
+};
+
+var randomNumber = exports.randomNumber = function randomNumber(min, max) {
+  return Math.floor(Math.random() * max) + min;
+};
 
 /***/ }),
 /* 5 */
@@ -206,45 +206,155 @@ module.exports = bytesToUuid;
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+__webpack_require__(40);
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var Api = function () {
+  var fetchScores = function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var scores;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/' + key + '/scores', {
+                method: 'GET',
+                headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json'
+                }
+              });
+
+            case 3:
+              scores = _context.sent;
+              return _context.abrupt('return', scores.json());
+
+            case 7:
+              _context.prev = 7;
+              _context.t0 = _context['catch'](0);
+              return _context.abrupt('return', _context.t0.json());
+
+            case 10:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, this, [[0, 7]]);
+    }));
+
+    return function fetchScores() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  var submitScores = function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(name, score) {
+      var result;
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              _context2.next = 3;
+              return fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/' + key + '/scores', {
+                method: 'POST',
+                headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  user: name,
+                  score: score
+                })
+              });
+
+            case 3:
+              result = _context2.sent;
+              return _context2.abrupt('return', result.json());
+
+            case 7:
+              _context2.prev = 7;
+              _context2.t0 = _context2['catch'](0);
+              return _context2.abrupt('return', _context2.t0.json());
+
+            case 10:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, _callee2, this, [[0, 7]]);
+    }));
+
+    return function submitScores(_x, _x2) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  var key = 'Hm3s8TVlfpOKKVs5mLeb';
+
+
+  return { fetchScores: fetchScores, submitScores: submitScores };
+}();
+
+exports.default = Api;
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 __webpack_require__(0);
 
-var _config = __webpack_require__(1);
+var _config = __webpack_require__(2);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _GameScene = __webpack_require__(8);
+var _GameScene = __webpack_require__(9);
 
 var _GameScene2 = _interopRequireDefault(_GameScene);
 
-var _BootScene = __webpack_require__(21);
+var _BootScene = __webpack_require__(22);
 
 var _BootScene2 = _interopRequireDefault(_BootScene);
 
-var _PreloaderScene = __webpack_require__(33);
+var _PreloaderScene = __webpack_require__(34);
 
 var _PreloaderScene2 = _interopRequireDefault(_PreloaderScene);
 
-var _TitleScene = __webpack_require__(34);
+var _TitleScene = __webpack_require__(35);
 
 var _TitleScene2 = _interopRequireDefault(_TitleScene);
 
-var _OptionsScene = __webpack_require__(35);
+var _OptionsScene = __webpack_require__(36);
 
 var _OptionsScene2 = _interopRequireDefault(_OptionsScene);
 
-var _UIScene = __webpack_require__(36);
+var _UIScene = __webpack_require__(37);
 
 var _UIScene2 = _interopRequireDefault(_UIScene);
 
-var _CreditsScene = __webpack_require__(37);
+var _CreditsScene = __webpack_require__(38);
 
 var _CreditsScene2 = _interopRequireDefault(_CreditsScene);
 
-var _GameOverScene = __webpack_require__(38);
+var _GameOverScene = __webpack_require__(39);
 
 var _GameOverScene2 = _interopRequireDefault(_GameOverScene);
 
-var _Model = __webpack_require__(41);
+var _LeaderBoardScene = __webpack_require__(41);
+
+var _LeaderBoardScene2 = _interopRequireDefault(_LeaderBoardScene);
+
+var _Model = __webpack_require__(42);
 
 var _Model2 = _interopRequireDefault(_Model);
 
@@ -271,6 +381,7 @@ var Game = function (_Phaser$Game) {
     _this.scene.add('Title', _TitleScene2.default);
     _this.scene.add('GameOver', _GameOverScene2.default);
     _this.scene.add('Options', _OptionsScene2.default);
+    _this.scene.add('Score', _LeaderBoardScene2.default);
     _this.scene.add('Credits', _CreditsScene2.default);
     _this.scene.add('Ui', _UIScene2.default);
     _this.scene.add('Game', _GameScene2.default);
@@ -284,7 +395,7 @@ var Game = function (_Phaser$Game) {
 window.game = new Game();
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -298,23 +409,23 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 __webpack_require__(0);
 
-var _PlayerContainer = __webpack_require__(9);
+var _PlayerContainer = __webpack_require__(10);
 
 var _PlayerContainer2 = _interopRequireDefault(_PlayerContainer);
 
-var _Chest = __webpack_require__(11);
+var _Chest = __webpack_require__(12);
 
 var _Chest2 = _interopRequireDefault(_Chest);
 
-var _Monster = __webpack_require__(12);
+var _Monster = __webpack_require__(13);
 
 var _Monster2 = _interopRequireDefault(_Monster);
 
-var _Map = __webpack_require__(13);
+var _Map = __webpack_require__(14);
 
 var _Map2 = _interopRequireDefault(_Map);
 
-var _GameManger = __webpack_require__(14);
+var _GameManger = __webpack_require__(15);
 
 var _GameManger2 = _interopRequireDefault(_GameManger);
 
@@ -522,7 +633,7 @@ var GameScene = function (_Phaser$Scene) {
 exports.default = GameScene;
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -538,7 +649,7 @@ var _phaser = __webpack_require__(0);
 
 var _phaser2 = _interopRequireDefault(_phaser);
 
-var _Player = __webpack_require__(10);
+var _Player = __webpack_require__(11);
 
 var _Player2 = _interopRequireDefault(_Player);
 
@@ -692,7 +803,7 @@ var PlayerContainer = function (_Phaser$GameObjects$C) {
 exports.default = PlayerContainer;
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -740,7 +851,7 @@ var Player = function (_Phaser$Physics$Arcad) {
 exports.default = Player;
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -806,7 +917,7 @@ var Chest = function (_Phaser$Physics$Arcad) {
 exports.default = Chest;
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -909,7 +1020,7 @@ var Monster = function (_Phaser$Physics$Arcad) {
 exports.default = Monster;
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -963,7 +1074,7 @@ var Map = function () {
 exports.default = Map;
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -975,15 +1086,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _Spawner = __webpack_require__(15);
+var _Spawner = __webpack_require__(16);
 
 var _Spawner2 = _interopRequireDefault(_Spawner);
 
-var _PlayerModel = __webpack_require__(20);
+var _PlayerModel = __webpack_require__(21);
 
 var _PlayerModel2 = _interopRequireDefault(_PlayerModel);
 
-var _utils = __webpack_require__(3);
+var _utils = __webpack_require__(4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1161,7 +1272,7 @@ var GameManager = function () {
 exports.default = GameManager;
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1173,15 +1284,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _ChestModel = __webpack_require__(16);
+var _ChestModel = __webpack_require__(17);
 
 var _ChestModel2 = _interopRequireDefault(_ChestModel);
 
-var _MonsterModel = __webpack_require__(19);
+var _MonsterModel = __webpack_require__(20);
 
 var _MonsterModel2 = _interopRequireDefault(_MonsterModel);
 
-var _utils = __webpack_require__(3);
+var _utils = __webpack_require__(4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1285,7 +1396,7 @@ var Spawner = function () {
 exports.default = Spawner;
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1295,7 +1406,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _uuid = __webpack_require__(2);
+var _uuid = __webpack_require__(3);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1312,7 +1423,7 @@ var ChestModel = function ChestModel(x, y, gold, spawnerId) {
 exports.default = ChestModel;
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var rng = __webpack_require__(5);
@@ -1427,7 +1538,7 @@ module.exports = v1;
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var rng = __webpack_require__(5);
@@ -1462,7 +1573,7 @@ module.exports = v4;
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1474,9 +1585,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _uuid = __webpack_require__(2);
+var _uuid = __webpack_require__(3);
 
-var _utils = __webpack_require__(3);
+var _utils = __webpack_require__(4);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1547,7 +1658,7 @@ var MonsterModel = function () {
 exports.default = MonsterModel;
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1561,7 +1672,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _uuid = __webpack_require__(2);
+var _uuid = __webpack_require__(3);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1602,7 +1713,7 @@ var PlayerModel = function () {
 exports.default = PlayerModel;
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1616,43 +1727,43 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 __webpack_require__(0);
 
-var _adventure = __webpack_require__(22);
+var _adventure = __webpack_require__(23);
 
 var _adventure2 = _interopRequireDefault(_adventure);
 
-var _backgroundExtruded = __webpack_require__(23);
+var _backgroundExtruded = __webpack_require__(24);
 
 var _backgroundExtruded2 = _interopRequireDefault(_backgroundExtruded);
 
-var _items = __webpack_require__(24);
+var _items = __webpack_require__(25);
 
 var _items2 = _interopRequireDefault(_items);
 
-var _characters = __webpack_require__(25);
+var _characters = __webpack_require__(26);
 
 var _characters2 = _interopRequireDefault(_characters);
 
-var _monsters = __webpack_require__(26);
+var _monsters = __webpack_require__(27);
 
 var _monsters2 = _interopRequireDefault(_monsters);
 
-var _Pickup = __webpack_require__(27);
+var _Pickup = __webpack_require__(28);
 
 var _Pickup2 = _interopRequireDefault(_Pickup);
 
-var _EnemyDeath = __webpack_require__(28);
+var _EnemyDeath = __webpack_require__(29);
 
 var _EnemyDeath2 = _interopRequireDefault(_EnemyDeath);
 
-var _PlayerAttack = __webpack_require__(29);
+var _PlayerAttack = __webpack_require__(30);
 
 var _PlayerAttack2 = _interopRequireDefault(_PlayerAttack);
 
-var _PlayerDamage = __webpack_require__(30);
+var _PlayerDamage = __webpack_require__(31);
 
 var _PlayerDamage2 = _interopRequireDefault(_PlayerDamage);
 
-var _PlayerDeath = __webpack_require__(31);
+var _PlayerDeath = __webpack_require__(32);
 
 var _PlayerDeath2 = _interopRequireDefault(_PlayerDeath);
 
@@ -1664,7 +1775,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var jsonMap = __webpack_require__(32);
+var jsonMap = __webpack_require__(33);
 
 var BootScene = function (_Phaser$Scene) {
   _inherits(BootScene, _Phaser$Scene);
@@ -1718,7 +1829,7 @@ var BootScene = function (_Phaser$Scene) {
 exports.default = BootScene;
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1726,7 +1837,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "asset/adventure.ad8f5917d8f745bcf645236e75f61ab4.png");
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1734,7 +1845,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "asset/background-extruded.3ca0ea9e6a648f2832702d28eb560694.png");
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1742,7 +1853,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "asset/items.63d5788757f2f6e686fb26d87b5d294b.png");
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1750,7 +1861,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "asset/characters.d15dcf66b90c7e9e71f733a4d0ba3815.png");
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1758,7 +1869,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "asset/monsters.a7514453156b9f41a9863612d1be4f00.png");
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1766,7 +1877,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "cd2ff955b7ffbd7047746007217dc324.wav");
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1774,7 +1885,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "3b2889b0967d2eeadff69b58488b7514.wav");
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1782,7 +1893,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "e118eb50bdc0db240943dcd4d3d8d233.wav");
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1790,7 +1901,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "e4fc6a5c7d4095e44ad74f98725b2f47.wav");
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1798,13 +1909,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "30b16dda60aef81c889eb750ead08472.wav");
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports) {
 
 module.exports = {"compressionlevel":-1,"editorsettings":{"export":{"format":"json"}},"height":60,"infinite":false,"layers":[{"data":[295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,90,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,151,151,151,151,151,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,151,151,151,151,151,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,204,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,151,151,151,151,151,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,204,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,151,151,151,151,295,295,989,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,151,151,151,151,151,989,989,989,295,295,295,295,989,989,989,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,204,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,312,312,295,151,151,151,151,282,989,989,989,989,295,295,295,989,989,989,295,295,295,295,295,295,295,989,989,989,989,989,989,989,989,295,204,295,295,295,295,295,204,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,272,272,272,272,272,295,295,295,151,282,282,282,282,989,989,989,989,989,989,989,989,295,295,295,295,295,989,989,989,989,989,989,989,989,989,989,295,295,295,295,204,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,272,272,272,272,272,272,312,312,312,282,282,282,282,282,989,989,989,989,989,989,989,989,989,989,989,989,989,989,989,989,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,272,272,272,272,272,272,312,282,282,282,282,282,282,282,282,989,989,989,282,282,282,989,989,989,989,989,989,989,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,285,285,285,295,295,272,272,272,272,272,272,272,272,151,151,282,282,282,282,989,989,989,282,270,270,282,989,989,989,989,989,989,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,285,285,285,295,295,272,272,272,272,272,272,272,272,282,151,282,312,282,989,989,989,989,282,270,270,282,989,295,295,295,151,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,285,295,295,295,272,272,311,311,311,311,311,311,311,311,311,311,989,989,989,295,989,282,282,282,282,989,295,295,151,151,151,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,272,272,311,311,311,311,311,311,311,311,311,311,989,989,295,295,989,989,989,989,989,989,295,295,151,151,151,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,285,285,285,285,295,295,295,295,295,295,295,295,295,272,272,272,272,272,272,272,272,272,272,272,312,312,295,295,295,295,295,295,295,295,295,295,295,151,151,151,151,151,151,295,295,295,137,137,295,295,295,295,295,295,295,295,295,295,295,295,285,285,285,285,285,295,295,295,295,295,295,295,295,272,272,272,272,272,272,272,272,272,272,272,272,312,312,295,295,295,295,295,295,295,295,295,295,151,151,151,151,151,151,295,295,295,137,137,295,295,295,295,295,295,295,295,295,295,295,295,295,295,285,285,295,295,295,295,295,295,295,295,295,272,272,272,272,272,272,272,272,272,272,272,272,312,312,312,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295,295],"height":60,"id":1,"name":"background","opacity":1,"type":"tilelayer","visible":false,"width":60,"x":0,"y":0},{"data":[334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,0,0,0,0,0,0,0,638,638,638,638,638,638,638,638,638,638,638,638,638,638,638,638,334,1309,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,0,0,1609,0,0,0,0,0,0,0,0,334,334,334,334,334,334,0,0,0,848,0,0,0,638,638,638,638,638,638,638,0,0,0,0,0,638,638,334,334,334,334,334,334,1309,334,334,334,334,0,334,334,334,334,334,1309,334,334,0,0,0,0,0,0,0,0,0,0,0,1609,0,0,334,334,334,334,334,334,0,0,0,0,0,0,0,0,0,0,638,638,0,0,638,638,638,0,0,638,334,334,334,1609,0,0,334,334,334,0,0,0,0,334,334,334,334,334,334,0,0,0,0,0,0,848,0,0,0,0,0,0,0,0,334,334,334,1310,334,334,334,0,0,0,0,0,0,638,638,0,0,0,0,638,638,638,638,638,0,638,334,334,0,0,0,0,0,334,334,714,0,0,0,0,334,334,334,334,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,334,334,334,334,334,334,334,0,0,0,0,0,638,638,638,638,638,638,638,638,638,638,638,0,0,334,714,0,0,848,0,0,0,0,0,0,0,0,0,0,334,334,0,0,0,848,0,0,0,0,0,0,83,0,848,0,0,0,0,0,0,0,334,334,334,334,334,334,0,0,0,0,848,638,638,638,638,638,638,638,638,638,638,638,0,334,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1561,0,0,0,0,0,0,334,334,334,334,334,334,334,0,0,0,0,0,0,638,638,638,638,638,638,638,638,638,0,334,0,0,1609,0,0,0,848,0,0,0,0,0,848,0,0,0,0,0,863,0,0,0,0,0,1561,0,848,1355,1355,1355,1355,1355,1355,0,0,0,334,334,334,334,1309,334,334,334,334,334,0,0,0,0,0,638,638,638,638,638,638,638,0,0,0,0,0,0,0,0,0,0,0,0,848,0,848,0,0,0,0,0,1355,1355,1355,1355,1355,1355,0,0,0,1355,0,0,0,0,1355,0,0,0,0,0,1609,334,334,334,334,334,334,334,334,334,0,0,891,891,891,891,731,891,891,891,0,0,0,0,0,848,0,0,1609,0,0,0,0,0,0,0,0,0,0,0,1355,0,0,0,0,1355,0,0,0,1355,55,0,0,0,1355,1355,1355,1355,0,0,0,0,0,0,0,334,334,334,334,714,0,0,891,0,0,0,0,0,0,891,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,848,0,0,1355,0,1355,1355,0,1355,1355,1355,1355,1355,1355,1355,0,1355,1355,0,0,1355,0,0,0,0,0,0,848,0,0,0,0,0,0,0,891,0,0,0,0,0,0,891,0,0,1593,1594,1595,0,0,0,0,0,0,0,0,0,848,848,0,0,0,0,1355,0,1355,1355,0,0,0,0,0,0,0,0,0,0,0,0,59,1355,0,0,0,0,0,0,0,0,0,0,0,0,0,0,891,891,891,0,891,891,891,891,0,0,1617,1618,1619,0,0,848,0,0,0,0,0,0,1561,848,0,0,0,0,1355,0,0,0,0,0,0,0,0,0,0,1355,1355,1355,1355,1355,1355,1355,0,0,1667,1668,0,0,0,0,0,0,848,0,1539,0,0,0,891,0,891,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1355,0,0,0,0,1355,1355,1355,1355,0,0,1355,0,0,1355,0,0,0,0,0,1691,1692,0,1539,0,0,0,0,0,0,0,1539,0,0,891,0,891,891,891,0,891,334,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1355,1355,0,0,1355,1355,0,0,1355,0,0,0,0,60,1355,0,0,0,56,0,0,0,0,0,0,0,0,0,0,0,1539,1539,0,0,891,0,891,891,0,0,891,334,334,0,0,0,334,334,334,0,0,1341,1341,1341,1341,0,1341,1341,1341,1341,0,794,0,0,794,0,0,0,1355,1355,1355,1355,1355,1355,1355,0,0,0,0,0,83,0,0,0,0,0,0,0,0,0,0,0,0,0,891,0,891,891,0,0,891,334,334,334,334,334,334,334,334,334,0,1341,0,0,0,0,0,0,0,1341,0,0,0,0,0,0,0,0,845,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,891,891,891,891,891,0,0,0,0,0,891,334,334,334,334,334,334,334,334,334,0,1341,0,0,1307,0,1307,0,0,1341,0,0,0,0,0,0,0,0,334,334,334,845,0,0,0,1539,0,0,0,0,0,0,1009,1009,1009,1009,0,0,0,0,0,0,0,0,0,0,891,891,0,857,891,334,334,334,334,334,334,1309,334,334,0,1341,0,0,0,0,0,0,0,1341,0,0,0,0,1537,0,845,334,334,334,334,334,1539,0,0,0,1539,0,0,0,0,0,1009,1363,1363,1009,0,0,0,0,891,891,891,891,891,0,891,891,891,891,891,334,1309,334,334,334,334,334,334,334,0,1341,0,0,1307,0,1307,0,0,1341,857,0,0,0,1539,1515,334,334,334,334,334,334,0,1515,0,1539,0,0,0,0,0,0,1009,1363,1363,1009,0,0,0,0,891,0,0,0,891,0,0,0,0,0,781,334,334,334,334,334,334,334,334,0,0,1341,0,0,0,0,0,0,0,1341,0,0,0,1341,1341,1341,1341,1341,1341,1341,1341,1341,1341,0,0,0,0,0,0,0,0,0,1009,1009,1009,1009,0,0,0,0,891,0,891,0,891,0,0,0,0,0,0,334,334,334,334,334,334,0,0,0,0,1341,0,0,1307,0,1307,0,0,1341,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,891,0,891,0,891,0,891,891,0,0,781,334,334,334,334,334,334,0,0,0,0,1341,0,0,0,0,0,0,0,1341,0,0,0,1341,1341,1341,1341,1341,1341,1341,1341,1341,1341,0,0,0,0,81,0,0,0,0,0,0,0,0,0,0,0,0,891,0,891,0,0,0,891,0,0,0,0,334,334,0,0,334,334,0,0,0,0,1341,0,0,1307,0,1307,0,0,1341,0,0,0,0,334,334,334,334,334,334,334,0,0,0,0,0,0,0,0,0,1537,0,0,1516,0,0,0,0,0,0,891,0,891,891,891,891,891,0,0,0,784,0,0,0,0,0,0,0,0,0,0,1341,0,0,0,0,0,0,0,1341,0,0,0,0,334,334,334,334,334,334,334,0,0,0,0,845,0,1537,1537,334,334,334,0,1537,0,0,0,0,0,0,891,0,0,0,0,0,891,891,891,891,891,0,843,0,0,0,0,0,0,0,0,1341,1341,1341,1341,0,1341,1341,1341,1341,0,0,0,334,334,334,334,334,334,334,334,0,845,0,0,0,334,334,334,334,334,334,334,334,0,845,0,0,0,0,891,891,891,891,891,0,0,0,0,0,862,1539,0,0,1515,0,0,0,1515,0,0,0,1515,0,0,0,0,0,0,0,0,0,334,334,334,334,334,334,334,334,334,334,1537,0,1516,334,334,334,334,334,334,334,334,334,334,0,1537,0,0,0,0,0,0,0,891,891,891,891,891,891,891,0,0,0,1515,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,334,334,334,1310,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,0,0,1516,0,0,0,0,0,0,0,0,0,1539,0,0,0,843,0,0,1539,0,843,0,1539,0,1539,1515,0,0,0,0,0,0,0,1516,0,0,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,1310,334,334,334,1537,0,0,0,0,0,0,0,1516,0,0,1537,0,1516,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1539,1539,1539,1539,1539,1539,1539,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,0,0,845,0,0,1516,1516,1516,0,0,0,0,845,1539,0,0,0,0,0,843,0,0,0,843,0,0,0,0,0,0,0,0,0,0,0,0,0,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,0,0,895,895,895,895,895,895,0,0,0,0,0,0,0,0,0,843,0,0,877,877,0,877,877,877,877,877,877,0,0,0,0,0,0,0,0,0,0,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,0,0,895,895,895,895,895,895,895,895,895,0,895,895,0,0,845,0,877,877,877,877,877,0,877,877,877,877,877,877,877,877,877,877,0,0,877,877,877,0,0,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,895,895,895,895,895,895,895,895,895,895,0,0,895,895,895,0,0,0,877,877,877,877,877,0,877,877,877,877,877,877,877,877,877,877,877,877,877,877,877,877,0,334,334,334,334,334,334,334,844,0,844,334,334,334,334,334,334,334,334,895,895,895,895,895,895,895,895,895,895,895,0,895,895,895,895,895,0,0,877,877,877,877,877,0,0,877,877,877,877,877,877,877,877,877,877,877,877,877,877,877,0,334,334,334,334,334,334,844,0,0,0,334,334,334,334,334,334,334,334,895,895,74,0,895,895,895,895,895,895,895,0,895,895,895,895,895,895,0,877,877,877,877,877,877,0,0,0,0,877,877,877,877,877,877,877,877,877,877,877,877,0,334,334,334,334,334,334,0,844,0,334,334,334,334,334,334,334,334,334,895,895,0,0,895,895,895,895,0,0,0,0,0,0,0,895,895,895,0,877,877,877,877,877,877,877,877,877,0,0,877,877,877,877,877,877,877,877,877,877,877,0,334,334,1310,334,334,334,844,0,334,334,334,334,334,334,1310,334,334,334,895,895,895,0,0,895,895,895,0,82,0,0,0,82,0,895,895,895,895,877,877,877,877,877,877,877,877,877,877,0,0,877,877,877,0,0,0,0,877,877,877,0,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,895,895,895,895,0,895,0,0,0,0,0,0,0,0,0,895,895,895,895,877,877,877,877,877,877,877,877,877,877,877,0,0,0,0,0,1128,1128,0,877,877,877,877,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,844,895,895,895,0,0,0,895,0,82,0,0,0,82,0,895,895,895,895,877,877,877,877,877,877,877,877,877,877,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,1469,895,0,0,0,0,0,0,0,895,895,895,895,877,877,877,877,877,877,877,877,877,877,877,877,877,877,877,877,877,877,877,0,0,943,943,943,943,943,1362,1362,1362,1362,1362,1362,1030,1030,1030,1030,1362,0,0,0,0,0,1539,0,895,895,895,1469,895,895,895,895,895,0,895,895,895,895,895,895,877,877,877,877,877,877,877,877,877,877,877,877,877,877,877,877,877,877,877,877,0,943,943,943,943,943,943,1362,1362,1362,1362,1362,1030,1030,1030,1030,0,0,0,0,845,0,0,0,895,895,895,895,895,895,0,0,0,0,895,895,895,895,895,895,877,877,877,877,877,877,877,877,877,877,877,877,877,877,877,877,877,877,877,877,0,943,943,943,943,943,0,0,0,0,0,0,1030,1030,1030,1030,0,845,1540,0,0,0,0,844,0,844,895,895,895,895,0,895,895,895,895,895,895,895,895,845,877,877,877,877,877,1014,1014,1011,1014,1014,1014,1014,877,877,877,877,877,877,877,0,0,943,943,943,943,845,0,0,1539,0,0,0,1030,1030,1030,1030,0,0,0,0,0,0,0,0,0,0,844,895,895,895,0,0,895,895,895,895,895,895,0,1539,877,877,877,877,877,1014,0,0,0,0,0,1014,877,877,877,877,877,1014,1014,0,1014,1014,943,943,0,1539,0,0,0,0,1539,845,0,1027,1028,0,0,0,0,0,845,0,0,0,0,0,0,0,895,895,895,0,895,844,0,844,0,1539,0,844,877,877,877,877,877,1014,0,0,0,0,0,1015,877,877,877,877,877,1014,0,0,0,1011,0,0,0,0,0,0,0,0,0,0,0,1028,1028,0,0,845,0,0,0,1539,0,845,0,1539,0,0,0,0,0,0,0,0,0,0,0,0,0,0,877,877,877,877,877,1014,0,0,0,0,0,1011,0,0,1539,845,1539,1011,0,0,0,1011,0,0,845,0,0,0,0,1539,0,0,0,1028,1027,0,0,0,1539,0,0,0,0,0,0,0,0,0,0,0,0,845,0,0,0,0,845,0,0,844,877,877,877,877,877,1014,35,0,0,0,1011,1011,0,0,0,0,0,1011,1011,0,1011,1011,0,1539,1539,0,0,0,0,0,0,0,1030,1030,1030,1030,0,0,0,0,0,845,0,0,0,844,0,0,0,0,844,0,0,844,0,0,0,0,1539,0,877,877,877,877,877,1014,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1539,1539,0,0,0,0,0,0,845,1030,1030,1030,1030,1540,0,0,845,0,0,0,0,0,0,0,844,0,0,0,0,0,0,845,0,845,0,0,1539,877,877,877,0,0,1011,0,0,0,0,1011,0,0,0,0,0,0,0,0,0,0,0,1539,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1539,0,0,0,0,0,0,0,844,0,845,273,273,273,273,273,1011,1011,1011,1011,1011,1011,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,845,0,1513,1514,0,0,0,844,0,0,0,0,845,0,0,0,1539,273,273,273,273,273,273,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1030,1030,1030,1030,1539,0,0,0,0,0,1539,0,0,1537,1538,0,844,0,0,0,0,844,1009,1009,1009,1009,1009,0,273,273,273,273,273,273,0,1011,1011,1011,1011,0,0,0,0,0,0,1009,1009,1009,1009,0,0,0,0,0,0,0,0,0,0,0,1030,1030,1030,1030,0,0,1513,1514,0,0,0,0,0,0,0,0,0,844,0,1539,0,0,1009,0,0,0,1009,845,273,273,273,273,273,273,273,1011,0,0,1011,0,0,0,0,0,0,1009,0,0,1009,0,0,0,0,0,0,0,0,0,0,0,0,1028,1028,0,0,0,1537,1538,0,0,844,0,0,845,0,0,0,0,0,0,0,845,1009,0,0,0,1009,0,273,273,273,273,273,273,273,1011,1011,0,1011,0,0,0,0,0,0,1009,0,0,1009,0,0,1011,1011,0,1011,1011,0,0,0,0,0,1028,1027,1539,0,0,0,845,0,0,0,0,0,0,0,0,844,0,845,0,0,0,1009,1009,0,1009,1009,845,273,273,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1009,1009,1009,1009,0,0,1011,0,0,0,1011,0,0,0,0,0,1027,1028,0,0,845,0,0,0,0,0,845,0,0,1319,1319,1319,1319,1319,1319,0,0,0,0,0,0,0,844,273,273,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1011,0,0,0,1011,1011,1011,1011,0,1030,1030,1030,1030,0,0,0,0,0,0,0,0,0,845,1319,0,0,0,0,1319,845,0,0,0,0,0,0,1539,273,273,273,273,273,273,273,273,273,273,273,0,0,0,1539,0,0,0,0,1539,1539,0,0,1011,0,0,0,0,0,0,1011,0,1030,1030,1030,1030,1539,0,0,1564,844,0,0,0,0,0,1319,0,0,0,0,0,0,0,0,0,119,0,0,845,273,273,273,273,273,273,273,273,273,273,273,273,0,0,0,0,845,0,0,0,0,0,0,1011,817,0,0,0,0,804,1011,0,1030,1030,1030,1030,0,0,0,0,0,0,0,845,0,0,1319,1319,1319,80,0,1319,0,0,1539,0,0,0,0,0,273,273,273,273,273,273,273,273,273,273,273,273,0,0,0,0,0,0,1539,0,845,0,0,1011,1011,1011,1011,1011,1011,1011,1011,845,1030,1030,1030,1030,0,845,0,1539,1539,845,0,0,845,0,844,0,1319,1319,1319,1319,844,0,844,0,845,1539,844,845],"height":60,"id":2,"name":"blocked","opacity":1,"type":"tilelayer","visible":false,"width":60,"x":0,"y":0},{"draworder":"topdown","id":3,"name":"chest_locations","objects":[{"gid":86,"height":32,"id":6,"name":"","properties":[{"name":"spawner","type":"string","value":"6"}],"rotation":0,"type":"","visible":true,"width":32,"x":417,"y":934},{"gid":86,"height":32,"id":7,"name":"","properties":[{"name":"spawner","type":"string","value":"1"}],"rotation":0,"type":"","visible":true,"width":32,"x":448,"y":1635},{"gid":86,"height":32,"id":8,"name":"","properties":[{"name":"spawner","type":"string","value":"3"}],"rotation":0,"type":"","visible":true,"width":32,"x":1664,"y":1214},{"gid":86,"height":32,"id":11,"name":"","properties":[{"name":"spawner","type":"string","value":"4"}],"rotation":0,"type":"","visible":true,"width":32,"x":1407,"y":125},{"gid":86,"height":32,"id":12,"name":"","properties":[{"name":"spawner","type":"string","value":"5"}],"rotation":0,"type":"","visible":true,"width":32,"x":960,"y":119},{"gid":86,"height":32,"id":13,"name":"","properties":[{"name":"spawner","type":"string","value":"5"}],"rotation":0,"type":"","visible":true,"width":32,"x":1149,"y":607},{"gid":86,"height":32,"id":14,"name":"","properties":[{"name":"spawner","type":"string","value":"6"}],"rotation":0,"type":"","visible":true,"width":32,"x":64,"y":413},{"gid":86,"height":32,"id":15,"name":"","properties":[{"name":"spawner","type":"string","value":"2"}],"rotation":0,"type":"","visible":true,"width":32,"x":1445,"y":1632},{"gid":86,"height":32,"id":16,"name":"","properties":[{"name":"spawner","type":"string","value":"6"}],"rotation":0,"type":"","visible":true,"width":32,"x":352,"y":197},{"gid":86,"height":32,"id":17,"name":"","properties":[{"name":"spawner","type":"string","value":"5"}],"rotation":0,"type":"","visible":true,"width":32,"x":806,"y":411},{"gid":86,"height":32,"id":18,"name":"","properties":[{"name":"spawner","type":"string","value":"6"}],"rotation":0,"type":"","visible":true,"width":32,"x":38,"y":961},{"gid":86,"height":32,"id":19,"name":"","properties":[{"name":"spawner","type":"string","value":"1"}],"rotation":0,"type":"","visible":true,"width":32,"x":224,"y":1822},{"gid":86,"height":32,"id":20,"name":"","properties":[{"name":"spawner","type":"string","value":"1"}],"rotation":0,"type":"","visible":true,"width":32,"x":227,"y":1442},{"gid":86,"height":32,"id":21,"name":"","properties":[{"name":"spawner","type":"string","value":"1"}],"rotation":0,"type":"","visible":true,"width":32,"x":801,"y":1538},{"gid":86,"height":32,"id":22,"name":"","properties":[{"name":"spawner","type":"string","value":"2"}],"rotation":0,"type":"","visible":true,"width":32,"x":993,"y":1796},{"gid":86,"height":32,"id":23,"name":"","properties":[{"name":"spawner","type":"string","value":"2"}],"rotation":0,"type":"","visible":true,"width":32,"x":1283,"y":1794},{"gid":86,"height":32,"id":24,"name":"","properties":[{"name":"spawner","type":"string","value":"2"}],"rotation":0,"type":"","visible":true,"width":32,"x":1314,"y":1401},{"gid":86,"height":32,"id":25,"name":"","properties":[{"name":"spawner","type":"string","value":"2"}],"rotation":0,"type":"","visible":true,"width":32,"x":1566,"y":1828},{"gid":86,"height":32,"id":26,"name":"","properties":[{"name":"spawner","type":"string","value":"2"}],"rotation":0,"type":"","visible":true,"width":32,"x":1767,"y":1697},{"gid":86,"height":32,"id":27,"name":"","properties":[{"name":"spawner","type":"string","value":"3"}],"rotation":0,"type":"","visible":true,"width":32,"x":1384,"y":1150},{"gid":86,"height":32,"id":28,"name":"","properties":[{"name":"spawner","type":"string","value":"3"}],"rotation":0,"type":"","visible":true,"width":32,"x":1874,"y":1081},{"gid":86,"height":32,"id":29,"name":"","properties":[{"name":"spawner","type":"string","value":"3"}],"rotation":0,"type":"","visible":true,"width":32,"x":1757,"y":900},{"gid":86,"height":32,"id":30,"name":"","properties":[{"name":"spawner","type":"string","value":"3"}],"rotation":0,"type":"","visible":true,"width":32,"x":1802,"y":759},{"gid":86,"height":32,"id":31,"name":"","properties":[{"name":"spawner","type":"string","value":"4"}],"rotation":0,"type":"","visible":true,"width":32,"x":1814,"y":322},{"gid":86,"height":32,"id":32,"name":"","properties":[{"name":"spawner","type":"string","value":"3"}],"rotation":0,"type":"","visible":true,"width":32,"x":1357,"y":758},{"gid":86,"height":32,"id":33,"name":"","properties":[{"name":"spawner","type":"string","value":"4"}],"rotation":0,"type":"","visible":true,"width":32,"x":1326,"y":352},{"gid":86,"height":32,"id":34,"name":"","properties":[{"name":"spawner","type":"string","value":"5"}],"rotation":0,"type":"","visible":true,"width":32,"x":1007,"y":296},{"gid":86,"height":32,"id":35,"name":"","properties":[{"name":"spawner","type":"string","value":"5"}],"rotation":0,"type":"","visible":true,"width":32,"x":646,"y":144},{"gid":86,"height":32,"id":36,"name":"","properties":[{"name":"spawner","type":"string","value":"5"}],"rotation":0,"type":"","visible":true,"width":32,"x":531,"y":787},{"gid":86,"height":32,"id":37,"name":"","properties":[{"name":"spawner","type":"string","value":"6"}],"rotation":0,"type":"","visible":true,"width":32,"x":356,"y":544},{"gid":86,"height":32,"id":38,"name":"","properties":[{"name":"spawner","type":"string","value":"5"}],"rotation":0,"type":"","visible":true,"width":32,"x":824,"y":495},{"gid":86,"height":32,"id":39,"name":"","properties":[{"name":"spawner","type":"string","value":"1"}],"rotation":0,"type":"","visible":true,"width":32,"x":638,"y":1503},{"gid":86,"height":32,"id":40,"name":"","properties":[{"name":"spawner","type":"string","value":"1"}],"rotation":0,"type":"","visible":true,"width":32,"x":811,"y":1879},{"gid":86,"height":32,"id":41,"name":"","properties":[{"name":"spawner","type":"string","value":"1"}],"rotation":0,"type":"","visible":true,"width":32,"x":557,"y":1882},{"gid":86,"height":32,"id":42,"name":"","properties":[{"name":"spawner","type":"string","value":"4"}],"rotation":0,"type":"","visible":true,"width":32,"x":1656,"y":122},{"gid":86,"height":32,"id":43,"name":"","properties":[{"name":"spawner","type":"string","value":"6"}],"rotation":0,"type":"","visible":true,"width":32,"x":146,"y":803}],"opacity":1,"type":"objectgroup","visible":false,"x":0,"y":0},{"draworder":"topdown","id":4,"name":"monster_locations","objects":[{"gid":44,"height":32,"id":44,"name":"","properties":[{"name":"spawner","type":"string","value":"1"}],"rotation":0,"type":"","visible":true,"width":32,"x":67,"y":283},{"gid":44,"height":32,"id":45,"name":"","properties":[{"name":"spawner","type":"string","value":"1"}],"rotation":0,"type":"","visible":true,"width":32,"x":257,"y":451},{"gid":44,"height":32,"id":46,"name":"","properties":[{"name":"spawner","type":"string","value":"1"}],"rotation":0,"type":"","visible":true,"width":32,"x":387,"y":189},{"gid":44,"height":32,"id":47,"name":"","properties":[{"name":"spawner","type":"string","value":"1"}],"rotation":0,"type":"","visible":true,"width":32,"x":526,"y":564},{"gid":44,"height":32,"id":48,"name":"","properties":[{"name":"spawner","type":"string","value":"1"}],"rotation":0,"type":"","visible":true,"width":32,"x":365,"y":775},{"gid":44,"height":32,"id":49,"name":"","properties":[{"name":"spawner","type":"string","value":"1"}],"rotation":0,"type":"","visible":true,"width":32,"x":212,"y":810},{"gid":44,"height":32,"id":50,"name":"","properties":[{"name":"spawner","type":"string","value":"2"}],"rotation":0,"type":"","visible":true,"width":32,"x":741,"y":94},{"gid":44,"height":32,"id":51,"name":"","properties":[{"name":"spawner","type":"string","value":"2"}],"rotation":0,"type":"","visible":true,"width":32,"x":731,"y":415},{"gid":44,"height":32,"id":52,"name":"","properties":[{"name":"spawner","type":"string","value":"2"}],"rotation":0,"type":"","visible":true,"width":32,"x":632,"y":740},{"gid":44,"height":32,"id":53,"name":"","properties":[{"name":"spawner","type":"string","value":"2"}],"rotation":0,"type":"","visible":true,"width":32,"x":1059,"y":193},{"gid":44,"height":32,"id":54,"name":"","properties":[{"name":"spawner","type":"string","value":"2"}],"rotation":0,"type":"","visible":true,"width":32,"x":1058,"y":749},{"gid":44,"height":32,"id":55,"name":"","properties":[{"name":"spawner","type":"string","value":"2"}],"rotation":0,"type":"","visible":true,"width":32,"x":1113,"y":474},{"gid":44,"height":32,"id":56,"name":"","properties":[{"name":"spawner","type":"string","value":"3"}],"rotation":0,"type":"","visible":true,"width":32,"x":1417,"y":81},{"gid":44,"height":32,"id":57,"name":"","properties":[{"name":"spawner","type":"string","value":"3"}],"rotation":0,"type":"","visible":true,"width":32,"x":1730,"y":343},{"gid":44,"height":32,"id":58,"name":"","properties":[{"name":"spawner","type":"string","value":"3"}],"rotation":0,"type":"","visible":true,"width":32,"x":1380,"y":441},{"gid":44,"height":32,"id":59,"name":"","properties":[{"name":"spawner","type":"string","value":"3"}],"rotation":0,"type":"","visible":true,"width":32,"x":1415,"y":732},{"gid":44,"height":32,"id":60,"name":"","properties":[{"name":"spawner","type":"string","value":"3"}],"rotation":0,"type":"","visible":true,"width":32,"x":1836,"y":678},{"gid":44,"height":32,"id":61,"name":"","properties":[{"name":"spawner","type":"string","value":"3"}],"rotation":0,"type":"","visible":true,"width":32,"x":1580,"y":458},{"gid":44,"height":32,"id":62,"name":"","properties":[{"name":"spawner","type":"string","value":"4"}],"rotation":0,"type":"","visible":true,"width":32,"x":1531,"y":915},{"gid":44,"height":32,"id":63,"name":"","properties":[{"name":"spawner","type":"string","value":"4"}],"rotation":0,"type":"","visible":true,"width":32,"x":1655,"y":1173},{"gid":44,"height":32,"id":64,"name":"","properties":[{"name":"spawner","type":"string","value":"4"}],"rotation":0,"type":"","visible":true,"width":32,"x":1864,"y":984},{"gid":44,"height":32,"id":65,"name":"","properties":[{"name":"spawner","type":"string","value":"4"}],"rotation":0,"type":"","visible":true,"width":32,"x":1746,"y":1491},{"gid":44,"height":32,"id":66,"name":"","properties":[{"name":"spawner","type":"string","value":"4"}],"rotation":0,"type":"","visible":true,"width":32,"x":1229,"y":1502},{"gid":44,"height":32,"id":67,"name":"","properties":[{"name":"spawner","type":"string","value":"4"}],"rotation":0,"type":"","visible":true,"width":32,"x":1717,"y":1856},{"gid":44,"height":32,"id":68,"name":"","properties":[{"name":"spawner","type":"string","value":"4"}],"rotation":0,"type":"","visible":true,"width":32,"x":1352,"y":1843},{"gid":44,"height":32,"id":69,"name":"","properties":[{"name":"spawner","type":"string","value":"4"}],"rotation":0,"type":"","visible":true,"width":32,"x":1373,"y":1553},{"gid":44,"height":32,"id":70,"name":"","properties":[{"name":"spawner","type":"string","value":"5"}],"rotation":0,"type":"","visible":true,"width":32,"x":902,"y":1411},{"gid":44,"height":32,"id":71,"name":"","properties":[{"name":"spawner","type":"string","value":"5"}],"rotation":0,"type":"","visible":true,"width":32,"x":926,"y":1760},{"gid":44,"height":32,"id":72,"name":"","properties":[{"name":"spawner","type":"string","value":"5"}],"rotation":0,"type":"","visible":true,"width":32,"x":661,"y":1860},{"gid":44,"height":32,"id":73,"name":"","properties":[{"name":"spawner","type":"string","value":"5"}],"rotation":0,"type":"","visible":true,"width":32,"x":486,"y":1561},{"gid":44,"height":32,"id":74,"name":"","properties":[{"name":"spawner","type":"string","value":"5"}],"rotation":0,"type":"","visible":true,"width":32,"x":254,"y":1492},{"gid":44,"height":32,"id":75,"name":"","properties":[{"name":"spawner","type":"string","value":"5"}],"rotation":0,"type":"","visible":true,"width":32,"x":378,"y":1805},{"gid":44,"height":32,"id":76,"name":"","properties":[{"name":"spawner","type":"string","value":"5"}],"rotation":0,"type":"","visible":true,"width":32,"x":720,"y":1526},{"gid":44,"height":32,"id":77,"name":"","properties":[{"name":"spawner","type":"string","value":"6"}],"rotation":0,"type":"","visible":true,"width":32,"x":518,"y":998},{"gid":44,"height":32,"id":78,"name":"","properties":[{"name":"spawner","type":"string","value":"6"}],"rotation":0,"type":"","visible":true,"width":32,"x":80,"y":905},{"gid":44,"height":32,"id":79,"name":"","properties":[{"name":"spawner","type":"string","value":"6"}],"rotation":0,"type":"","visible":true,"width":32,"x":795,"y":1680},{"gid":44,"height":32,"id":80,"name":"","properties":[{"name":"spawner","type":"string","value":"6"}],"rotation":0,"type":"","visible":true,"width":32,"x":1263,"y":1671},{"gid":44,"height":32,"id":81,"name":"","properties":[{"name":"spawner","type":"string","value":"6"}],"rotation":0,"type":"","visible":true,"width":32,"x":1668,"y":1262},{"gid":44,"height":32,"id":82,"name":"","properties":[{"name":"spawner","type":"string","value":"6"}],"rotation":0,"type":"","visible":true,"width":32,"x":1215,"y":670},{"gid":44,"height":32,"id":83,"name":"","properties":[{"name":"spawner","type":"string","value":"6"}],"rotation":0,"type":"","visible":true,"width":32,"x":893,"y":109}],"opacity":1,"type":"objectgroup","visible":true,"x":0,"y":0},{"draworder":"topdown","id":5,"name":"player_locations","objects":[{"gid":2,"height":32,"id":84,"name":"","rotation":0,"type":"","visible":true,"width":32,"x":194,"y":317},{"gid":2,"height":32,"id":85,"name":"","rotation":0,"type":"","visible":true,"width":32,"x":160,"y":873},{"gid":2,"height":32,"id":86,"name":"","rotation":0,"type":"","visible":true,"width":32,"x":538,"y":1601},{"gid":2,"height":32,"id":87,"name":"","rotation":0,"type":"","visible":true,"width":32,"x":949,"y":1470},{"gid":2,"height":32,"id":88,"name":"","rotation":0,"type":"","visible":true,"width":32,"x":1336,"y":1678},{"gid":2,"height":32,"id":89,"name":"","rotation":0,"type":"","visible":true,"width":32,"x":1841,"y":920},{"gid":2,"height":32,"id":90,"name":"","rotation":0,"type":"","visible":true,"width":32,"x":1461,"y":793},{"gid":2,"height":32,"id":91,"name":"","rotation":0,"type":"","visible":true,"width":32,"x":1449,"y":185},{"gid":2,"height":32,"id":92,"name":"","rotation":0,"type":"","visible":true,"width":32,"x":1269,"y":44},{"gid":2,"height":32,"id":93,"name":"","rotation":0,"type":"","visible":true,"width":32,"x":1048,"y":568},{"gid":2,"height":32,"id":94,"name":"","rotation":0,"type":"","visible":true,"width":32,"x":1227,"y":328},{"gid":2,"height":32,"id":95,"name":"","rotation":0,"type":"","visible":true,"width":32,"x":687,"y":473},{"gid":2,"height":32,"id":96,"name":"","rotation":0,"type":"","visible":true,"width":32,"x":716,"y":224},{"gid":2,"height":32,"id":97,"name":"","rotation":0,"type":"","visible":true,"width":32,"x":997,"y":156},{"gid":2,"height":32,"id":98,"name":"","rotation":0,"type":"","visible":true,"width":32,"x":503,"y":254},{"gid":2,"height":32,"id":99,"name":"","rotation":0,"type":"","visible":true,"width":32,"x":383,"y":677},{"gid":2,"height":32,"id":100,"name":"","rotation":0,"type":"","visible":true,"width":32,"x":620,"y":959},{"gid":2,"height":32,"id":101,"name":"","rotation":0,"type":"","visible":true,"width":32,"x":1659,"y":1600},{"gid":2,"height":32,"id":102,"name":"","rotation":0,"type":"","visible":true,"width":32,"x":249,"y":1579},{"gid":2,"height":32,"id":103,"name":"","rotation":0,"type":"","visible":true,"width":32,"x":1836,"y":536}],"opacity":1,"type":"objectgroup","visible":false,"x":0,"y":0}],"nextlayerid":6,"nextobjectid":123,"orientation":"orthogonal","renderorder":"right-down","tiledversion":"1.4.2","tileheight":32,"tilesets":[{"columns":32,"firstgid":1,"image":"Downloads/PhaserRPG-Assets/level/background.png","imageheight":1504,"imagewidth":1024,"margin":0,"name":"background","spacing":0,"tilecount":1504,"tileheight":32,"tilewidth":32},{"columns":24,"firstgid":1505,"image":"OneDrive/Documents/tiles.png","imageheight":452,"imagewidth":774,"margin":0,"name":"tiles","spacing":0,"tilecount":336,"tileheight":32,"tilewidth":32}],"tilewidth":32,"type":"map","version":1.4,"width":60}
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1939,7 +2050,7 @@ exports.default = PreloaderScene;
 ;
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1953,11 +2064,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 __webpack_require__(0);
 
-var _config = __webpack_require__(1);
+var _config = __webpack_require__(2);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _Button = __webpack_require__(4);
+var _Button = __webpack_require__(1);
 
 var _Button2 = _interopRequireDefault(_Button);
 
@@ -2010,7 +2121,7 @@ exports.default = TitleScene;
 ;
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2024,7 +2135,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 __webpack_require__(0);
 
-var _Button = __webpack_require__(4);
+var _Button = __webpack_require__(1);
 
 var _Button2 = _interopRequireDefault(_Button);
 
@@ -2109,7 +2220,7 @@ exports.default = OptionsScene;
 ;
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2179,7 +2290,7 @@ var UiScene = function (_Phaser$Scene) {
 exports.default = UiScene;
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2193,7 +2304,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 __webpack_require__(0);
 
-var _config = __webpack_require__(1);
+var _config = __webpack_require__(2);
 
 var _config2 = _interopRequireDefault(_config);
 
@@ -2261,7 +2372,7 @@ exports.default = CreditsScene;
 ;
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2277,11 +2388,11 @@ var _phaser = __webpack_require__(0);
 
 var _phaser2 = _interopRequireDefault(_phaser);
 
-var _Button = __webpack_require__(4);
+var _Button = __webpack_require__(1);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _api = __webpack_require__(39);
+var _api = __webpack_require__(7);
 
 var _api2 = _interopRequireDefault(_api);
 
@@ -2356,112 +2467,6 @@ var GameOverScene = function (_Phaser$Scene) {
 }(_phaser2.default.Scene);
 
 exports.default = GameOverScene;
-
-/***/ }),
-/* 39 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-__webpack_require__(40);
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var Api = function () {
-  var fetchScores = function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var scores;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.prev = 0;
-              _context.next = 3;
-              return fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/' + key + '/scores', {
-                method: 'GET',
-                headers: {
-                  Accept: 'application/json',
-                  'Content-Type': 'application/json'
-                }
-              });
-
-            case 3:
-              scores = _context.sent;
-              return _context.abrupt('return', scores.json());
-
-            case 7:
-              _context.prev = 7;
-              _context.t0 = _context['catch'](0);
-              return _context.abrupt('return', _context.t0.json());
-
-            case 10:
-            case 'end':
-              return _context.stop();
-          }
-        }
-      }, _callee, this, [[0, 7]]);
-    }));
-
-    return function fetchScores() {
-      return _ref.apply(this, arguments);
-    };
-  }();
-
-  var submitScores = function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(name, score) {
-      var result;
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.prev = 0;
-              _context2.next = 3;
-              return fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/' + key + '/scores', {
-                method: 'POST',
-                headers: {
-                  Accept: 'application/json',
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                  user: name,
-                  score: score
-                })
-              });
-
-            case 3:
-              result = _context2.sent;
-              return _context2.abrupt('return', result.json());
-
-            case 7:
-              _context2.prev = 7;
-              _context2.t0 = _context2['catch'](0);
-              return _context2.abrupt('return', _context2.t0.json());
-
-            case 10:
-            case 'end':
-              return _context2.stop();
-          }
-        }
-      }, _callee2, this, [[0, 7]]);
-    }));
-
-    return function submitScores(_x, _x2) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-
-  var key = 'Hm3s8TVlfpOKKVs5mLeb';
-
-
-  return { fetchScores: fetchScores, submitScores: submitScores };
-}();
-
-exports.default = Api;
 
 /***/ }),
 /* 40 */
@@ -3230,6 +3235,99 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _phaser = __webpack_require__(0);
+
+var _phaser2 = _interopRequireDefault(_phaser);
+
+var _Button = __webpack_require__(1);
+
+var _Button2 = _interopRequireDefault(_Button);
+
+var _api = __webpack_require__(7);
+
+var _api2 = _interopRequireDefault(_api);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/* eslint-disable no-undef */
+
+var LeaderBoardScene = function (_Phaser$Scene) {
+  _inherits(LeaderBoardScene, _Phaser$Scene);
+
+  function LeaderBoardScene() {
+    _classCallCheck(this, LeaderBoardScene);
+
+    return _possibleConstructorReturn(this, (LeaderBoardScene.__proto__ || Object.getPrototypeOf(LeaderBoardScene)).call(this, 'Score'));
+  }
+
+  _createClass(LeaderBoardScene, [{
+    key: 'create',
+    value: function create() {
+      var _this2 = this;
+
+      var image = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'bgImage');
+      var scaleX = this.cameras.main.width / image.width;
+      var scaleY = this.cameras.main.height / image.height;
+      var scale = Math.max(scaleX, scaleY);
+      image.setScale(scale).setScrollFactor(0);
+      this.add.text(400, 100, 'LeaderBoard 🏆', {
+        color: 'white',
+        fontSize: '32px '
+      }).setOrigin(0.5, 0.5);
+
+      _api2.default.fetchScores().then(function (data) {
+        var result = data.result;
+
+        var scoreStyle = {
+          color: 'white',
+          fontSize: '38px '
+        };
+
+        result.sort(function (x, y) {
+          return y.score - x.score;
+        });
+        var space = 40;
+        for (var i = 0; i < 10; i += 1) {
+          if (result[i] !== undefined) {
+            _this2.add.text(260, 150 + space * i, i + 1 + '. Name: ' + result[i].user + ' \u2194\uFE0F Score: ' + result[i].score, scoreStyle);
+          }
+        }
+      });
+
+      this.menuButton = new _Button2.default(this, 700, 100, 'blueButton1', 'blueButton2', 'Restart', 'Instructions').setInteractive();
+
+      this.menuButton.on('pointerdown', function () {
+        _this2.model = _this2.sys.game.globals.model;
+        _this2.model.score = 0;
+        _this2.scene.start('Instructions');
+      });
+    }
+  }]);
+
+  return LeaderBoardScene;
+}(_phaser2.default.Scene);
+
+exports.default = LeaderBoardScene;
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Model = function () {
@@ -3273,4 +3371,4 @@ var Model = function () {
 exports.default = Model;
 
 /***/ })
-],[7]);
+],[8]);

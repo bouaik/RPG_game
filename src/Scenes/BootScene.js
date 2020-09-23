@@ -18,7 +18,7 @@ export default class BootScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('logo', logoImage);
+    this.load.image('logo1', logoImage);
     this.load.image('background', backgroundTiled);
     this.loadSpriteSheets();
     this.loadAudio();

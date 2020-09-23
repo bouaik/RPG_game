@@ -210,7 +210,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-__webpack_require__(40);
+__webpack_require__(42);
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
@@ -297,7 +297,7 @@ var Api = function () {
     };
   }();
 
-  var key = 'Hm3s8TVlfpOKKVs5mLeb';
+  var key = 'Hm3s8TVlfpOfhbs5mLec';
 
 
   return { fetchScores: fetchScores, submitScores: submitScores };
@@ -338,23 +338,27 @@ var _OptionsScene = __webpack_require__(36);
 
 var _OptionsScene2 = _interopRequireDefault(_OptionsScene);
 
-var _UIScene = __webpack_require__(37);
+var _UiScene = __webpack_require__(37);
 
-var _UIScene2 = _interopRequireDefault(_UIScene);
+var _UiScene2 = _interopRequireDefault(_UiScene);
 
-var _CreditsScene = __webpack_require__(38);
+var _InstructionScene = __webpack_require__(38);
+
+var _InstructionScene2 = _interopRequireDefault(_InstructionScene);
+
+var _CreditsScene = __webpack_require__(40);
 
 var _CreditsScene2 = _interopRequireDefault(_CreditsScene);
 
-var _GameOverScene = __webpack_require__(39);
+var _GameOverScene = __webpack_require__(41);
 
 var _GameOverScene2 = _interopRequireDefault(_GameOverScene);
 
-var _LeaderBoardScene = __webpack_require__(41);
+var _LeaderBoardScene = __webpack_require__(43);
 
 var _LeaderBoardScene2 = _interopRequireDefault(_LeaderBoardScene);
 
-var _Model = __webpack_require__(42);
+var _Model = __webpack_require__(44);
 
 var _Model2 = _interopRequireDefault(_Model);
 
@@ -382,8 +386,9 @@ var Game = function (_Phaser$Game) {
     _this.scene.add('GameOver', _GameOverScene2.default);
     _this.scene.add('Options', _OptionsScene2.default);
     _this.scene.add('Score', _LeaderBoardScene2.default);
+    _this.scene.add('Instructions', _InstructionScene2.default);
     _this.scene.add('Credits', _CreditsScene2.default);
-    _this.scene.add('Ui', _UIScene2.default);
+    _this.scene.add('Ui', _UiScene2.default);
     _this.scene.add('Game', _GameScene2.default);
     _this.scene.start('Boot');
     return _this;
@@ -478,7 +483,7 @@ var GameScene = function (_Phaser$Scene) {
   }, {
     key: 'createPlayer',
     value: function createPlayer(playerObject) {
-      this.player = new _PlayerContainer2.default(this, playerObject.x * 2, playerObject.y * 2, 'characters', 5, playerObject.health, playerObject.maxHealth, playerObject.id, this.playerAttackAudio);
+      this.player = new _PlayerContainer2.default(this, playerObject.x * 2, playerObject.y * 2, 'characters', 4, playerObject.health, playerObject.maxHealth, playerObject.id, this.playerAttackAudio);
     }
   }, {
     key: 'createGroups',
@@ -1789,7 +1794,7 @@ var BootScene = function (_Phaser$Scene) {
   _createClass(BootScene, [{
     key: 'preload',
     value: function preload() {
-      this.load.image('logo', _adventure2.default);
+      this.load.image('logo1', _adventure2.default);
       this.load.image('background', _backgroundExtruded2.default);
       this.loadSpriteSheets();
       this.loadAudio();
@@ -2019,7 +2024,7 @@ var PreloaderScene = function (_Phaser$Scene) {
       // load assets needed in our game
       this.load.image('blueButton1', 'assets/ui/blue_button02.png');
       this.load.image('blueButton2', 'assets/ui/blue_button03.png');
-      // this.load.image('phaserLogo', 'assets/logo.png');
+      this.load.image('bgImage', 'assets/Battleground3.png');
       this.load.image('box', 'assets/ui/grey_box.png');
       this.load.image('checkedBox', 'assets/ui/blue_boxCheckmark.png');
       this.load.audio('bgMusic', ['assets/TownTheme.ogg']);
@@ -2096,7 +2101,7 @@ var TitleScene = function (_Phaser$Scene) {
     key: 'create',
     value: function create() {
       // Game
-      this.gameButton = new _Button2.default(this, _config2.default.width / 2, _config2.default.height / 2 - 100, 'blueButton1', 'blueButton2', 'Play', 'Game');
+      this.gameButton = new _Button2.default(this, _config2.default.width / 2, _config2.default.height / 2 - 100, 'blueButton1', 'blueButton2', 'Play', 'Instructions');
 
       // Options
       this.optionsButton = new _Button2.default(this, _config2.default.width / 2, _config2.default.height / 2, 'blueButton1', 'blueButton2', 'Options', 'Options');
@@ -2304,6 +2309,115 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 __webpack_require__(0);
 
+var _Button = __webpack_require__(1);
+
+var _Button2 = _interopRequireDefault(_Button);
+
+var _blue_button = __webpack_require__(39);
+
+var _blue_button2 = _interopRequireDefault(_blue_button);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/* eslint-disable no-undef */
+
+var InstructionScene = function (_Phaser$Scene) {
+  _inherits(InstructionScene, _Phaser$Scene);
+
+  function InstructionScene() {
+    _classCallCheck(this, InstructionScene);
+
+    return _possibleConstructorReturn(this, (InstructionScene.__proto__ || Object.getPrototypeOf(InstructionScene)).call(this, 'Instructions'));
+  }
+
+  _createClass(InstructionScene, [{
+    key: 'create',
+    value: function create() {
+      var _this2 = this;
+
+      var image = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'bgImage');
+      var scaleX = this.cameras.main.width / image.width;
+      var scaleY = this.cameras.main.height / image.height;
+      var scale = Math.max(scaleX, scaleY);
+      image.setScale(scale).setScrollFactor(0);
+
+      this.text = this.add.text(300, 40, 'How to play😎', { fontSize: 40 });
+
+      this.leftButton = new _Button2.default(this, 300, 120, 'blueButton1', 'blueButton2', '⬅️');
+      this.leftText = this.add.text(400, 100, 'Move the player to the left', { fontSize: 24 });
+
+      this.rightButton = new _Button2.default(this, 300, 180, 'blueButton1', 'blueButton2', '➡️');
+      this.rightText = this.add.text(400, 160, 'Move the player to the right', { fontSize: 24 });
+
+      this.upButton = new _Button2.default(this, 300, 240, 'blueButton1', 'blueButton2', '⬆️');
+      this.upText = this.add.text(400, 220, 'Move the player up', { fontSize: 24 });
+
+      this.downButton = new _Button2.default(this, 300, 300, 'blueButton1', 'blueButton2', '⬇️');
+      this.downText = this.add.text(400, 280, 'Move the player down', { fontSize: 24 });
+
+      this.menuButton = new _Button2.default(this, 400, 500, 'blueButton1', 'blueButton2', 'Menu', 'Title');
+
+      this.intro = this.add.text(215, 400, 'Enter your name: ', { fontSize: 20, fontFamily: 'monospace' });
+
+      var input = this.add.dom(480, 410, 'input', {
+        type: 'text',
+        name: 'nameField',
+        fontSize: '32px',
+        backgroundColor: '#fff'
+      });
+      input.scaleX = 0.4;
+      input.scaleY = 0.6;
+
+      var style = 'background: url(' + _blue_button2.default + '); border: none; border-radius: 5px; color: #fff;';
+      var gameButton = this.add.dom(590, 412, 'button', style, 'Play');
+      gameButton.scaleX = 1.5;
+      gameButton.scaleY = 1.7;
+      gameButton.addListener('click');
+
+      gameButton.on('click', function () {
+        if (input.node.value) {
+          _this2.model = _this2.sys.game.globals.model;
+          _this2.model.userName = input.node.value;
+          _this2.scene.start('Game');
+        }
+      });
+    }
+  }]);
+
+  return InstructionScene;
+}(Phaser.Scene);
+
+exports.default = InstructionScene;
+
+/***/ }),
+/* 39 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "asset/blue_button02.3a2349b881476b99c64b145d033b0ece.png");
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+__webpack_require__(0);
+
 var _config = __webpack_require__(2);
 
 var _config2 = _interopRequireDefault(_config);
@@ -2372,7 +2486,7 @@ exports.default = CreditsScene;
 ;
 
 /***/ }),
-/* 39 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2469,7 +2583,7 @@ var GameOverScene = function (_Phaser$Scene) {
 exports.default = GameOverScene;
 
 /***/ }),
-/* 40 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -3223,7 +3337,7 @@ try {
 
 
 /***/ }),
-/* 41 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3316,7 +3430,7 @@ var LeaderBoardScene = function (_Phaser$Scene) {
 exports.default = LeaderBoardScene;
 
 /***/ }),
-/* 42 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

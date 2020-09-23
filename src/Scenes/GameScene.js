@@ -41,7 +41,7 @@ export default class GameScene extends Phaser.Scene {
       playerObject.x * 2,
       playerObject.y * 2,
       'characters',
-      5,
+      4,
       playerObject.health,
       playerObject.maxHealth,
       playerObject.id,

@@ -2,13 +2,13 @@ import 'phaser';// eslint-disable-line
 import config from '../Config/config';
 import Button from '../Objects/Button';
 
-
-export default class TitleScene extends Phaser.Scene {// eslint-disable-line
+/* eslint-disable */
+export default class TitleScene extends Phaser.Scene {
   constructor() {
     super('Title');
   }
 
-  preload() {// eslint-disable-line
+  preload() {
   }
 
   create() {

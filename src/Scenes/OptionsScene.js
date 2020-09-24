@@ -1,4 +1,4 @@
-import 'phaser';
+import 'phaser';// eslint-disable-line
 import Button from '../Objects/Button';
 
 export default class OptionsScene extends Phaser.Scene { // eslint-disable-line

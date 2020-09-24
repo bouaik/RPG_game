@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import Phaser from 'phaser';// eslint-disable-line
 import Button from '../Objects/Button';
 import Api from '../Objects/api';
 /* eslint-disable no-undef */

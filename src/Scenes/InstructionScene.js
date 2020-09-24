@@ -1,4 +1,4 @@
-import 'phaser';
+import 'phaser';// eslint-disable-line
 import Button from '../Objects/Button';
 import Button2 from '../../build/assets/ui/blue_button02.png';
 /* eslint-disable no-undef */

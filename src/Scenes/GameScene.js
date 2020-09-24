@@ -1,4 +1,4 @@
-import 'phaser';
+import 'phaser';// eslint-disable-line
 import PlayerContainer from '../classes/player/PlayerContainer';
 import Chest from '../classes/Chest';
 import Monster from '../classes/Monster';

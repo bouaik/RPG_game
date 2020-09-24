@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import Phaser from 'phaser';// eslint-disable-line
 
 export default class Monster extends Phaser.Physics.Arcade.Image {
   constructor(scene, x, y, key, frame, id, health, maxHealth) {

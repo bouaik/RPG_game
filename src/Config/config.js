@@ -1,4 +1,4 @@
-import 'phaser';
+import 'phaser'; // eslint-disable-line
 /* eslint-disable no-undef */
 
 export default {

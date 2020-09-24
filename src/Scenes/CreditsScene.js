@@ -1,4 +1,4 @@
-import 'phaser';
+import 'phaser';// eslint-disable-line
 import config from '../Config/config';
 /* eslint-disable */
 

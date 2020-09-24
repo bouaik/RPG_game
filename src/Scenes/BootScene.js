@@ -1,4 +1,4 @@
-import 'phaser';
+import 'phaser';// eslint-disable-line
 import logoImage from '../../build/assets/adventure.png';
 import backgroundTiled from '../../build/assets/level/background-extruded.png';
 import items from '../../build/assets/items.png';

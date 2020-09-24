@@ -1,6 +1,6 @@
+/* eslint-disable */
 import { v4 as uuidv4 } from 'uuid';
 import { randomNumber } from './utils';
-
 export default class MonsterModel {
   constructor(x, y, gold, spawnerId, frame, health, attack) {
     this.id = `${spawnerId}-${uuidv4()}`;

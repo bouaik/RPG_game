@@ -5,7 +5,7 @@ import Monster from '../classes/Monster';
 import Map from '../classes/Map';
 import GameManager from '../gameManager/GameManger';
 
-export default class GameScene extends Phaser.Scene {
+export default class GameScene extends Phaser.Scene { // eslint-disable-line
   constructor() {
     super('Game');
   }

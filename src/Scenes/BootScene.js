@@ -12,7 +12,7 @@ import playerDeath from '../../build/assets/audio/PlayerDeath.wav';
 
 const jsonMap = require('../../build/assets/level/forestland.json');
 
-export default class BootScene extends Phaser.Scene {
+export default class BootScene extends Phaser.Scene { // eslint-disable-line
   constructor() {
     super('Boot');
   }

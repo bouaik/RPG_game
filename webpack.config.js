@@ -4,12 +4,12 @@ const webpack = require('webpack');
 module.exports = {
   entry: {
     app: './src/index.js',
-    'production-dependencies': ['phaser']
+    'production-dependencies': ['phaser'],
   },
 
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'app.bundle.js'
+    filename: 'app.bundle.js',
   },
 
   module: {
@@ -20,9 +20,9 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env']
-          }
-        }
+            presets: ['env'],
+          },
+        },
       },
       {
         test: /\.(mp4|svg|png|jpe?g|gif)$/,
@@ -48,23 +48,23 @@ module.exports = {
         test: /\.(mp3|ogg|wav)$/,
         loader: 'file-loader',
       },
-    ]
+    ],
   },
 
   devServer: {
     contentBase: path.resolve(__dirname, 'build'),
-    port: 8050
+    port: 8050,
   },
 
 
   plugins: [
     new webpack.DefinePlugin({
       'typeof CANVAS_RENDERER': JSON.stringify(true),
-      'typeof WEBGL_RENDERER': JSON.stringify(true)
+      'typeof WEBGL_RENDERER': JSON.stringify(true),
     }),
     new webpack.optimize.CommonsChunkPlugin({
-        name: 'production-dependencies',
-        filename: 'production-dependencies.bundle.js'
+      name: 'production-dependencies',
+      filename: 'production-dependencies.bundle.js',
     }),
-  ]
+  ],
 };

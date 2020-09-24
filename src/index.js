@@ -11,9 +11,9 @@ import CreditsScene from './Scenes/CreditsScene';
 import GameOverScene from './Scenes/GameOverScene';
 import LeaderBoardScene from './Scenes/LeaderBoardScene';
 import Model from './Scenes/Model';
- 
-class Game extends Phaser.Game {
-  constructor () {
+
+class Game extends Phaser.Game { // eslint-disable-line
+  constructor() {
     super(config);
     const model = new Model();
     this.globals = { model, bgMusic: null };
@@ -30,5 +30,5 @@ class Game extends Phaser.Game {
     this.scene.start('Boot');
   }
 }
- 
+
 window.game = new Game();

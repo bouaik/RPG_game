@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "12.18.4"
+  },
   "scripts": {
     "build": "yarn webpack --config webpack.config.js",
     "start": "yarn webpack-dev-server --config webpack.config.js",

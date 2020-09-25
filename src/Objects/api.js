@@ -1,4 +1,4 @@
-import 'regenerator-runtime';
+import 'regenerator-runtime'; // eslint-disable-line
 
 const Api = (() => {
   const key = 'Hm3s8TVlfpOfhbs5mLec';

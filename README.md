@@ -13,6 +13,7 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -37,21 +38,24 @@
 </p>
 
 <!-- TABLE OF CONTENTS -->
+
 ## Table of Contents
 
-* [About the Project](#about-the-project)
-* [Instructions](#Instructions)
-* [Install](#Install)
-* [Built With](#built-with)
-* [Contact](#Authors)
-* [Acknowledgements](#acknowledgements)
+- [About the Project](#about-the-project)
+- [Instructions](#Instructions)
+- [Install](#Install)
+- [Built With](#built-with)
+- [Contact](#Authors)
+- [Acknowledgements](#acknowledgements)
 
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
-> This is  rpg game where the warrior is randomly place at different level of the tilesmap at the start of each game. The warrior must kill the monsters, get the treasure box to get more gold. 
+> This is rpg game where the warrior is randomly place at different level of the tilesmap at the start of each game. The warrior must kill the monsters, get the treasure box to get more gold.
 
 ## Instructions
+
 - After the loading sceen, a sceen appears with the buttons. You can click on options to disable sound and music. To get started click on play.
 - When you click on play button you will be taken to a screen with instructions on how to play and make sure you enter your name and click on play button to get started.
 - How to play:
@@ -59,22 +63,23 @@
 - use the right arrow key on the keyboard to move the player movement to the right of the game scene.
 - use the up arrow key on the keyboard to move the player movement to up of the game scene.
 - use the down arrow key on the keyboard to move the player movement to down of the game scene.
-- use the lspacebar key on the keyboard to fight the monsters with your weapon which is a sword. 
+- use the lspacebar key on the keyboard to fight the monsters with your weapon which is a sword.
 - The warrior must collect the treasure box to get more gold.
 - The warrior get more health bar and gold by fighting the monsters with his sword. The sword can be gotten by pressing the spacebar key on your keyboard.
 - The warrior must be quick to fight the monsters so that he doesn't lose his healthbar.
 - The game is over if the warrior healthbar is empty.
 - If the game over it takes you to screen where you can add your scores to the leaderboard click on the button submit to add your name to the leaderboard.
 
-
 ### Live link
 
 [click here](https://youthful-lichterman-96f576.netlify.app)
 
 <!-- BUILD WITH -->
+
 ## Built With
 
 This project was built using these technologies.
+
 - JavaScript
 - Phaser3
 - Webpack
@@ -82,7 +87,6 @@ This project was built using these technologies.
 - Babel
 - Es6
 - Netlify
-
 
 ### Install
 
@@ -93,25 +97,25 @@ To run the app locally, clone the repository, navigate to it's containing direct
 ```bash
 git clone https://github.com/bouaik/RPG_game.git
 cd RPG_game
-yarn
-yarn start
+npm install
+npm run start
 ```
 
-and navigate to 
+and navigate to
+
 ```
 https://localhost:8050
 ```
 
-
 <!-- CONTACT -->
+
 ## Authors
 
-👤 **Lhoussaine Bouaik** 
-    
+👤 **Lhoussaine Bouaik**
+
 - [LinkedIn](https://www.linkedin.com/in/lhoussainebouaik)
 - [GitHub](https://github.com/bouaik)
 - [Email](bouaik.lhou@gmail.com)
-
 
 ## Show your support
 
@@ -119,6 +123,7 @@ Give a ⭐️ if you like this project!
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [contributors-shield]: https://img.shields.io/github/contributors/bouaik/RPG_game.svg?style=flat-square
 [contributors-url]: https://github.com/bouaik/RPG_game/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/bouaik/RPG_game.svg?style=flat-square

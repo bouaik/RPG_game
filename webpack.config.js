@@ -19,7 +19,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env'],
+            presets: ['@babel/preset-env'],
           },
         },
       },
@@ -54,7 +54,6 @@ module.exports = {
     contentBase: path.resolve(__dirname, 'build'),
     port: 8050,
   },
-
 
   plugins: [
     new webpack.DefinePlugin({
